@@ -9,7 +9,7 @@
 # --inventory ./inventory/hosts.yml \
 # ./virt-infra.yml
 #
-- hosts: kvmhost
+- hosts: all
   tasks:
     - name: download images
       get_url:
