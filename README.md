@@ -38,7 +38,7 @@
 # Manage KVM networks and guests with Ansible
 
 This is an example Ansible playbook for my [Virtual Infrastructure Ansible
-role](https://github.com/csmart/ansible-role-virt-infra).
+role](https://github.com/goffinet/ansible-role-virt-infra).
 
 It uses separate YAML Ansible [inventory files](#inventory) to define and
 manage networks and guests on a KVM host. Ansible's _--limit_ option lets you
@@ -64,7 +64,7 @@ using defaults.
 curl -O https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2
 sudo mv -iv CentOS-7-x86_64-GenericCloud.qcow2 /var/lib/libvirt/images/
 
-git clone --recursive https://github.com/csmart/virt-infra-ansible.git
+git clone --recursive https://github.com/goffinet/virt-infra-ansible.git
 cd virt-infra-ansible
 
 ./run.sh --limit kvmhost,simple
