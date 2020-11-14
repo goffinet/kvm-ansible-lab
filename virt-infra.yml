@@ -9,6 +9,15 @@
 # --inventory ./inventory/hosts.yml \
 # ./virt-infra.yml
 #
+- hosts: kvmhost
+  tasks:
+    - name: download images
+      get_url:
+        url: "{{ hostvars[groups['kvmhost'][0]].virt_infra_distro_image_url | default(virt_infra_distro_image_url) }}/{{ virt_infra_distro_image_url }}"
+        dest: "{{ hostvars[groups['kvmhost'][0]].virt_infra_host_image_path | default(virt_infra_host_image_path) }}/{{ virt_infra_distro_image }}"
+      delegate_to: "{{ groups['kvmhost'][0] }}"
+      when:
+        - inventory_hostname not in groups['kvmhost']
 - hosts: all
   gather_facts: no
   roles:
