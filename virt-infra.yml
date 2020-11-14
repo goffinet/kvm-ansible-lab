@@ -10,6 +10,7 @@
 # ./virt-infra.yml
 #
 - hosts: all
+  gather_facts: no
   tasks:
     - name: download images
       get_url:
