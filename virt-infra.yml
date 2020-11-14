@@ -9,16 +9,13 @@
 # --inventory ./inventory/hosts.yml \
 # ./virt-infra.yml
 #
-- hosts: all
+- hosts: kvmhost
   gather_facts: no
   tasks:
     - name: download images
       get_url:
-        url: "{{ hostvars[groups['kvmhost'][0]].virt_infra_distro_image_url | default(virt_infra_distro_image_url) }}/{{ virt_infra_distro_image_url }}"
-        dest: "{{ hostvars[groups['kvmhost'][0]].virt_infra_host_image_path | default(virt_infra_host_image_path) }}/{{ virt_infra_distro_image }}"
-      delegate_to: "{{ groups['kvmhost'][0] }}"
-      when:
-        - inventory_hostname not in groups['kvmhost']
+        url: "https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2"
+        dest: "/var/lib/libvirt/images"
 - hosts: all
   gather_facts: no
   roles:
