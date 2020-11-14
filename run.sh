@@ -24,12 +24,12 @@ if ! type ansible-playbook &>/dev/null ; then
 			fi
 			echo sudo ${PKG_MGR:-dnf} -y install epel-release
 			sudo ${PKG_MGR:-dnf} -y install epel-release
-			echo sudo ${PKG_MGR:-dnf} -y install ansible
-			sudo ${PKG_MGR:-dnf} -y install ansible
+			echo sudo ${PKG_MGR:-dnf} -y install ansible jq
+			sudo ${PKG_MGR:-dnf} -y install ansible jq
 			;;
 		fedora)
-			echo sudo dnf -y install ansible
-			sudo dnf -y install ansible
+			echo sudo dnf -y install ansible jq
+			sudo dnf -y install ansible jq
 			;;
 		debian)
 			echo "Installing Ansible from Ubuntu PPA..."
@@ -41,8 +41,8 @@ if ! type ansible-playbook &>/dev/null ; then
 			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 			echo sudo apt update
 			sudo apt update
-			echo sudo apt install -y ansible
-			sudo apt install -y ansible
+			echo sudo apt install -y ansible jq
+			sudo apt install -y ansible jq
 			;;
 		ubuntu)
 			echo "Installing Ansible from PPA..."
@@ -50,12 +50,12 @@ if ! type ansible-playbook &>/dev/null ; then
 			sudo apt install -y software-properties-common
 			echo sudo apt-add-repository --yes --update ppa:ansible/ansible
 			sudo apt-add-repository --yes --update ppa:ansible/ansible
-			echo sudo apt install -y ansible
-			sudo apt install -y ansible
+			echo sudo apt install -y ansible jq
+			sudo apt install -y ansible jq
 			;;
 		opensuse|opensuse-leap)
-			echo sudo zypper install -y ansible
-			sudo zypper install -y ansible
+			echo sudo zypper install -y ansible jq
+			sudo zypper install -y ansible jq
 			;;
 		*)
 			echo "${ID} not supported, please install manually"
