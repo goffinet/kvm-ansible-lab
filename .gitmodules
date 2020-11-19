@@ -1,6 +1,3 @@
 [submodule "roles/ansible-role-virt-infra"]
 	path = roles/ansible-role-virt-infra
 	url = https://github.com/goffinet/ansible-role-virt-infra
-[submodule "roles/ansible-vagrant"]
-	path = roles/ansible-vagrant
-	url = https://github.com/andrewrothstein/ansible-vagrant
