@@ -4,3 +4,9 @@
 [submodule "roles/ansible-vagrant"]
 	path = roles/ansible-vagrant
 	url = https://github.com/goffinet/ansible-vagrant
+[submodule "roles/ansible-role-pip"]
+	path = roles/ansible-role-pip
+	url = https://github.com/goffinet/ansible-role-pip
+[submodule "roles/ansible-role-docker"]
+	path = roles/ansible-role-docker
+	url = https://github.com/goffinet/ansible-role-docker
