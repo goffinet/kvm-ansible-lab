@@ -1,7 +1,7 @@
 ---
 lab:
   hosts:
-    node[1:2]:
+    node[0:2]:
     controller:
   vars:
       virt_infra_user: ansible
