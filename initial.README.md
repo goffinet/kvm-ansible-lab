@@ -278,7 +278,7 @@ virtinst
 #### Ubuntu
 
 ```bash
- Create SSH key if you don't have one
+# Create SSH key if you don't have one
 ssh-keygen
 
 # libvirtd
