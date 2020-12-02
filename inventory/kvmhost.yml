@@ -22,7 +22,7 @@ kvmhost:
         - name: "other"
       present:
         - name: "default"
-          ip_address: "192.168.112.1"
+          ip_address: "192.168.12.1"
           subnet: "255.255.255.0"
-          dhcp_start: "192.168.112.2"
+          dhcp_start: "192.168.12.10"
           dhcp_end: "192.168.112.254"
