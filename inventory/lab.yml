@@ -2,12 +2,12 @@
 lab:
   hosts:
     node[0:2]:
-    controller:
+#    controller:
   vars:
       virt_infra_user: ansible
       virt_infra_password: "testtest"
       virt_infra_root_password: "testtest"
-      virt_infra_ram: "1024"
+      virt_infra_ram: "512"
       virt_infra_state: running
       virt_infra_variant: centos7.0
       virt_infra_distro_image: CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2
