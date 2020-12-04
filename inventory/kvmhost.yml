@@ -21,8 +21,8 @@ kvmhost:
       absent:
         - name: "other"
       present:
-        - name: "default"
+        - name: "lab"
           ip_address: "192.168.12.1"
           subnet: "255.255.255.0"
           dhcp_start: "192.168.12.10"
-          dhcp_end: "192.168.112.254"
+          dhcp_end: "192.168.12.254"
