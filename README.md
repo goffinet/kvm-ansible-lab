@@ -6,9 +6,9 @@ Pour reproduire cette topologie avec libvirt/KVM, vous avez besoin d'un hôte de
 
 Après avoir installé les pré-requis, nous allons créer trois machines virtuelles : controller, node1 et node2 et approvisionner la solution pour assurer une gestion des deux noeuds par la machine de contrôle.
 
-Nous conseillons vivement d'utiliser des instances dans le nuage pour des serveurs "bare-metal"[^1] chez [Scaleway](https://www.scaleway.com/fr/serveurs-bare-metal/), [Packet](https://metal.equinix.com/product/servers/), [Hetzner](https://www.hetzner.com/dedicated-rootserver) ou encore [OVH](https://www.ovhcloud.com/fr/bare-metal/).
+Nous conseillons vivement d'utiliser des instances dans le nuage pour des serveurs "bare-metal"[^3] chez [Scaleway](https://www.scaleway.com/fr/serveurs-bare-metal/), [Packet](https://metal.equinix.com/product/servers/), [Hetzner](https://www.hetzner.com/dedicated-rootserver) ou encore [OVH](https://www.ovhcloud.com/fr/bare-metal/).
 
-[^1]: Un "serveur bare-metal" est un serveur informatique qui est un "serveur physique à locataire unique". Ce terme est utilisé de nos jours pour le distinguer des formes modernes de virtualisation et d'hébergement en nuage. ([source](https://en.wikipedia.org/wiki/Bare-metal_server))
+[^3]: Un "serveur bare-metal" est un serveur informatique qui est un "serveur physique à locataire unique". Ce terme est utilisé de nos jours pour le distinguer des formes modernes de virtualisation et d'hébergement en nuage. ([source](https://en.wikipedia.org/wiki/Bare-metal_server))
 
 Dans un premier temps, il s'agira de configurer l'hôte de virtualisation. Ensuite, on créera les trois machines virtuelles. Enfin, nous configurerons le "controller" en y installant Ansible, en y plaçant un fichier d'inventaire et un fichier de configuration par défaut. Une paire de clés SSH sera générée et permettra d'authentifier le controller auprès des noeuds.
 
@@ -55,13 +55,69 @@ La documentation nous indique que l'on peut modifier l'état de la topologie en 
 ou directement avec le livre de jeu :
 
 ```bash
-ansible-playbook all virt-infra.yml -e "virt_infra_state=undefined"
+ansible-playbook virt-infra.yml -e "virt_infra_state=undefined"
 ```
 
-### 4.4. Connexion au controller
+### 4.4. Gestion Ansible
 
-Dès que le lab sera monté, vous pourrez vous connecter sur le contrôleur :
+Dès que le lab sera monté, les machines virtuelles seront directement gérables à partir de l'hôte de virtualisation :
+
+```
+ansible -m ping all
+localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+node0 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+controller | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+node2 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+node1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+Aussi, vous pourrez éventuellement vous connecter sur le contrôleur :
 
 ```bash
 ssh root@controller
+```
+
+et créer un projet de base :
+
+
+```bash
+dnf -y install epel-release && dnf -y install ansible
+PROJECT="lab"
+mkdir ~/${PROJECT}
+cd ~/${PROJECT}
+cat <<  EOF > ~/${PROJECT}/ansible.cfg
+[defaults]
+inventory = ./inventory
+host_key_checking = False
+EOF
+cat <<  EOF > ~/${PROJECT}/inventory
+[nodes]
+node0
+node1
+node2
+
+[all:vars]
+ansible_connection=ssh
+ansible_user=ansible
+ansible_ssh_pass=testtest
+ansible_become=yes
+ansible_become_user=root
+ansible_become_method=sudo
+EOF
+ansible -m ping all
 ```
