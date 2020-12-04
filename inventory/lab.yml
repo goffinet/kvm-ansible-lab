@@ -16,3 +16,5 @@ lab:
       ansible_python_interpreter: /usr/libexec/platform-python
       virt_infra_disk_cmd:
         - echo 'fastestmirror=1' >> /etc/dnf/dnf.conf
+      virt_infra_networks:
+        - name: "lab"
