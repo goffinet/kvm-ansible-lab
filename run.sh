@@ -12,11 +12,11 @@ source /etc/os-release
 
 # Check for dependencies
 if ! type ansible-playbook &>/dev/null ; then
-  read -r -p "Ansible missing, install it? [y/N]: " answer
-  if [[ "${answer,,}" != "y" && "${answer,,}" != "yes" ]] ; then
-    echo "OK, please install it and retry."
-    exit 1
-  fi
+#  read -r -p "Ansible missing, install it? [y/N]: " answer
+#  if [[ "${answer,,}" != "y" && "${answer,,}" != "yes" ]] ; then
+#    echo "OK, please install it and retry."
+#    exit 1
+#  fi
   case "${ID,,}" in
     centos)
       if [[ "${VERSION_ID}" -eq "7" ]] ; then
