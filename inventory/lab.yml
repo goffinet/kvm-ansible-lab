@@ -1,5 +1,5 @@
 ---
-lab:
+nodes:
   hosts:
     node[0:2]:
 #    controller:
